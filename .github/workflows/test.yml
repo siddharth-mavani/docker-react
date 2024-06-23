@@ -20,7 +20,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker image
-        run: docker build -t react-app -f Dockerfile.dev .
+        run: docker build -t docker-react -f Dockerfile.dev .
 
       - name: Run tests
-        run: docker run react-app npm run test
+        run: docker run -e CI=true docker-react npm run test
