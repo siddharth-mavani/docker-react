@@ -1,4 +1,4 @@
-name: Docker-Test
+name: CI Workflow
 
 on:
   push:
@@ -22,5 +22,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t docker-react -f Dockerfile.dev .
 
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Run tests
-        run: docker run -e CI=true docker-react npm run test
+        run: docker run -e CI=true docker-react npm run test        
